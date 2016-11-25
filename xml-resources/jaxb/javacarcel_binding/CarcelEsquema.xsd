@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0">
+    <xsd:element name="Carcel">
+        <xsd:complexType>
+            <xsd:choice maxOccurs="unbounded">
+                <xsd:element name="Preso" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="DNI" type="xsd:string" />
+                            <xsd:element name="Nombre" type="xsd:string" />
+                            <xsd:element name="Apellidos" type="xsd:string" />
+                            <xsd:element name="Fecha_nacimiento" type="xsd:string" />
+                            <xsd:element name="Condenado_en" type="xsd:string" />
+                            <xsd:element name="Nacionalidad" type="xsd:string"/>
+                            <xsd:element name="Altura" type="xsd:string"/>
+                            <xsd:element name="ColorPiel" type="xsd:string" />
+                            <xsd:element name="BandaAsociacion" type="xsd:string" />
+                        </xsd:sequence>
+                        <xsd:attribute name="Codigo_preso" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
