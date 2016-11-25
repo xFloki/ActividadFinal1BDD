@@ -15,17 +15,14 @@ import javax.xml.bind.Unmarshaller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author xp
  */
 public class JAXB {
-    
+
     Carcel miCarcel;
-     
-   
-    
+
     public int abrir_XML_JAXB(File fichero) {
         JAXBContext contexto;
         try {
@@ -50,7 +47,7 @@ public class JAXB {
         //Recorre la lista para sacar los valores.
         for (int i = 0; i < lCarcel.size(); i++) {
             cadena_resultado = cadena_resultado + "\n" + "Código de Preso: " + lCarcel.get(i).getCodigoPreso();
-            cadena_resultado = cadena_resultado + "\n" + "El DNI es: " + lCarcel.get(i).getDNI();   
+            cadena_resultado = cadena_resultado + "\n" + "El DNI es: " + lCarcel.get(i).getDNI();
             cadena_resultado = cadena_resultado + "\n" + "El Nombre es: " + lCarcel.get(i).getNombre();
             cadena_resultado = cadena_resultado + "\n" + "El Apellido es: " + lCarcel.get(i).getApellidos();
             cadena_resultado = cadena_resultado + "\n" + "La Fecha De Nacimiento es: " + lCarcel.get(i).getFechaNacimiento();
@@ -63,84 +60,130 @@ public class JAXB {
         }
         return cadena_resultado;
     }
-    
-    public void cambiarDato(String presoNombre, String nuevoNombre, String cambio){
-        JAXBContext contexto; 
-        String datos_nodo[] = null;
-        String cadena_resultado = "";
-        //Crea una lista con objetos de tipo libro.
-        List<Carcel.Preso> lCarcel = miCarcel.getPreso();
-        switch(cambio){
-            case "DNI": 
-                for (int i = 0; i < lCarcel.size(); i++) {
-            if(lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())){
-                lCarcel.get(i).setDNI(nuevoNombre.trim());
-                 }
-            } ; break;
-            case "Nombre": 
-                for (int i = 0; i < lCarcel.size(); i++) {
-            if(lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())){
-                lCarcel.get(i).setNombre(nuevoNombre.trim());
-                 }
-            } ; break;
-            case "Apellidos": 
-                for (int i = 0; i < lCarcel.size(); i++) {
-            if(lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())){
-                lCarcel.get(i).setApellidos(nuevoNombre.trim());
-                 }
-            } ; break;
-            case "Fecha Nacimiento": 
-                for (int i = 0; i < lCarcel.size(); i++) {
-            if(lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())){
-                lCarcel.get(i).setFechaNacimiento(nuevoNombre.trim());
-                 }
-            } ; break;
-            case "Condenado en": 
-                for (int i = 0; i < lCarcel.size(); i++) {
-            if(lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())){
-                lCarcel.get(i).setCondenadoEn(nuevoNombre.trim());
-                 }
-            } ; break;
-            case "Nacionalidad": 
-                for (int i = 0; i < lCarcel.size(); i++) {
-            if(lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())){
-                lCarcel.get(i).setNacionalidad(nuevoNombre.trim());
-                 }
-            } ; break;
-            case "Altura": 
-                for (int i = 0; i < lCarcel.size(); i++) {
-            if(lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())){
-                lCarcel.get(i).setAltura(nuevoNombre.trim());
-                 }
-            } ; break;
-            case "Color de Piel": 
-                for (int i = 0; i < lCarcel.size(); i++) {
-            if(lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())){
-                lCarcel.get(i).setColorPiel(nuevoNombre.trim());
-                 }
-            } ; break;
-            case "Banda": 
-                for (int i = 0; i < lCarcel.size(); i++) {
-            if(lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())){
-                lCarcel.get(i).setBandaAsociacion(nuevoNombre.trim());
-                 }
-            } ; break;
-            
+
+    public int cambiarDato(String presoNombre, String nuevoNombre, String cambio) {
+        if(presoNombre.trim().equals("") || nuevoNombre.trim().equals("")){
+            return 2;
         }
-        //Recorre la lista para sacar los valores.
-        
-           
-       try {
+        try {
+            JAXBContext contexto;
+            String datos_nodo[] = null;
+            String cadena_resultado = "";
+            boolean presoExiste = false;
+            //Creamos una variable para comprobar si e¡xiste algun preso con el codigo que le hemos pasado
+            //cuando recorra el switch, al recorrer los codigos de preso si coincide colocaremos esta variable a
+            //true, de lo contrario se quedara en false y al acabar el switch haremos return 3 de este modo 
+            //en el frame al recibir este numero se sabra que no hay coincidencia de ningun preso con ese codigo y podremos informar con un errror
+            //Crea una lista con objetos de tipo libro.
+            List<Carcel.Preso> lCarcel = miCarcel.getPreso();
+            switch (cambio) {
+                case "DNI":
+                    for (int i = 0; i < lCarcel.size(); i++) {
+                        if (lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())) {
+                            presoExiste = true;
+                            lCarcel.get(i).setDNI(nuevoNombre.trim());
+                        }
+                    }
+                    ;
+                    break;
+                case "Nombre":
+                    for (int i = 0; i < lCarcel.size(); i++) {
+                        if (lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())) {
+                            presoExiste = true;
+                            lCarcel.get(i).setNombre(nuevoNombre.trim());
+                        }
+                    }
+                    ;
+                    break;
+                case "Apellidos":
+                    for (int i = 0; i < lCarcel.size(); i++) {
+                        if (lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())) {
+                            presoExiste = true;
+                            lCarcel.get(i).setApellidos(nuevoNombre.trim());
+                        }
+                    }
+                    ;
+                    break;
+                case "Fecha Nacimiento":
+                    for (int i = 0; i < lCarcel.size(); i++) {
+                        if (lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())) {
+                            presoExiste = true;
+                            lCarcel.get(i).setFechaNacimiento(nuevoNombre.trim());
+                        }
+                    }
+                    ;
+                    break;
+                case "Condenado en":
+                    for (int i = 0; i < lCarcel.size(); i++) {
+                        if (lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())) {
+                            presoExiste = true;
+                            lCarcel.get(i).setCondenadoEn(nuevoNombre.trim());
+                        }
+                    }
+                    ;
+                    break;
+                case "Nacionalidad":
+                    for (int i = 0; i < lCarcel.size(); i++) {
+                        if (lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())) {
+                            presoExiste = true;
+                            lCarcel.get(i).setNacionalidad(nuevoNombre.trim());
+                        }
+                    }
+                    ;
+                    break;
+                case "Altura":
+                    for (int i = 0; i < lCarcel.size(); i++) {
+                        if (lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())) {
+                            presoExiste = true;
+                            lCarcel.get(i).setAltura(nuevoNombre.trim());
+                        }
+                    }
+                    ;
+                    break;
+                case "Color de Piel":
+                    for (int i = 0; i < lCarcel.size(); i++) {
+                        if (lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())) {
+                            presoExiste = true;
+                            lCarcel.get(i).setColorPiel(nuevoNombre.trim());
+                        }
+                    }
+                    ;
+                    break;
+                case "Banda":
+                    for (int i = 0; i < lCarcel.size(); i++) {
+                        if (lCarcel.get(i).getCodigoPreso().equals(presoNombre.trim())) {
+                            presoExiste = true;
+                            lCarcel.get(i).setBandaAsociacion(nuevoNombre.trim());
+                        }
+                    }
+                    ;
+                    break;
+                 case "Selecciona un campo":
+                    return 2;
+                                     
+            }
             
-           JAXBContext context = JAXBContext.newInstance(Carcel.class);
-    Marshaller m = context.createMarshaller();
-    m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-    m.marshal(miCarcel, new FileOutputStream("Carcel.xml"));
+            if(!presoExiste){
+                return 3;
+            }
+            //Recorre la lista para sacar los valores.
+
+            try {
+
+                JAXBContext context = JAXBContext.newInstance(Carcel.class);
+                Marshaller m = context.createMarshaller();
+                m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+                m.marshal(miCarcel, new FileOutputStream("Carcel.xml"));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return 0;
+
+            }
         } catch (Exception ex) {
-            ex.printStackTrace();
-           
+            return 0;
         }
+
+        return 1;
     }
-    
-   
+
 }
