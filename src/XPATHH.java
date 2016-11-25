@@ -58,7 +58,7 @@ public class XPATHH {
                         salida = salida + "\n " + "Altura: " + datos_nodo[7];
                         salida = salida + "\n " + "Color de piel: " + datos_nodo[8];
                         salida = salida + "\n " + "Banda: " + datos_nodo[9];                      
-                        salida = salida + "\n ************************************";
+                        salida = salida + "\n \n ************************************ \n";
                     }
                     if (node.getNodeName() == "DNI" ||
                             node.getNodeName() == "Nombre" ) {

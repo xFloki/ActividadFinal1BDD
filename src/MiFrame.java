@@ -15,7 +15,6 @@ import javax.swing.UIManager;
 public class MiFrame extends javax.swing.JFrame {
 
     XPATHH gesXPATHH = new XPATHH();
-    DOM gesDOM = new DOM();
     SAX gesSAX = new SAX();
     JAXB gesJAXB = new JAXB();
     //variable de comprobacion de errores en las consulta, en 0 es que no hay error
@@ -66,7 +65,7 @@ public class MiFrame extends javax.swing.JFrame {
         jTextArea1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(jTextArea1);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cambiar Un Dato"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cambiar Datos"));
 
         jLabel1.setText("Codigo Preso");
 
@@ -132,7 +131,7 @@ public class MiFrame extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Consultas"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar Datos"));
 
         jButton2.setText("Ejecutar");
         jButton2.setEnabled(false);
@@ -219,6 +218,8 @@ public class MiFrame extends javax.swing.JFrame {
                 .addGap(76, 76, 76))
         );
 
+        jPanel1.getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -235,25 +236,32 @@ public class MiFrame extends javax.swing.JFrame {
         String consulta = (String) jComboBox2.getSelectedItem();
         switch (consulta.trim()) {
             case "Datos de Todos los presos":
-
+                jTextField3.setText("");
                 consultaPredefinida = "//Preso";
                 break;
             case "Todos los codigos de preso":
-
+                jTextField3.setText("");
                 consultaPredefinida = "/Carcel/Preso/@Codigo_preso";
+                
                 break;
             case "Preso con DNI:":
                 complementoConsulta();
                 consultaPredefinida = "/Carcel/Preso[./DNI='" + jTextField3.getText().trim() + "']";
+                
                 break;
             case "Preso con Código:":
                 complementoConsulta();
                 consultaPredefinida = "/Carcel/Preso[./@Codigo_preso='" + jTextField3.getText().trim() + "']";
                 break;
+            case "Presos con Nombre:":
+                complementoConsulta();
+                consultaPredefinida = "/Carcel/Preso[./Nombre='" + jTextField3.getText().trim() + "']";
+                break;    
             case "Presos con Apellido:":
                 complementoConsulta();
-                consultaPredefinida = "/Carcel/Preso[./Apellidos='" + jTextField3.getText().trim() + "']\"";
+                consultaPredefinida = "/Carcel/Preso[./Apellidos='" + jTextField3.getText().trim() + "']";
                 break;
+                
             case "Presos con Fecha de Nacimiento en:":
                 complementoConsulta();
                 consultaPredefinida = "/Carcel/Preso[./Fecha_nacimiento='" + jTextField3.getText().trim() + "']";
