@@ -1,6 +1,7 @@
 
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.UIManager;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,6 +26,12 @@ public class MiFrame extends javax.swing.JFrame {
      */
     public MiFrame() {
         initComponents();
+        try{
+           UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(Exception e) {
+        
+        }
+     
         this.setLocationRelativeTo(null);
         abrirMostrarSAX();
         
@@ -54,11 +61,6 @@ public class MiFrame extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItemDOM = new javax.swing.JMenuItem();
-        jMenuItemSAX = new javax.swing.JMenuItem();
-        jMenuItemJAXB = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,7 +74,7 @@ public class MiFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Codigo Preso");
 
-        jButton1.setText("Cambiar Dato");
+        jButton1.setText("Modificar");
         jButton1.setEnabled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,20 +97,25 @@ public class MiFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))))
-                .addGap(57, 57, 57)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jButton1)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -186,36 +193,6 @@ public class MiFrame extends javax.swing.JFrame {
 
         jLabel4.setForeground(new java.awt.Color(255, 0, 51));
 
-        jMenu1.setText("Abrir XML ");
-
-        jMenuItemDOM.setText("DOM");
-        jMenuItemDOM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemDOMActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItemDOM);
-
-        jMenuItemSAX.setText("SAX");
-        jMenuItemSAX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemSAXActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItemSAX);
-
-        jMenuItemJAXB.setText("JAXB");
-        jMenuItemJAXB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemJAXBActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItemJAXB);
-
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -225,25 +202,24 @@ public class MiFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(41, 41, 41))
+                .addGap(64, 64, 64))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1))
                 .addGap(76, 76, 76))
         );
 
@@ -293,42 +269,6 @@ public class MiFrame extends javax.swing.JFrame {
         //Coloco el cursor en la parte de arriba del jtextarea opara que quede mejor 
         jTextArea1.setCaretPosition(0);
     }
-
-    private void jMenuItemDOMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDOMActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        int retrival = chooser.showOpenDialog(null);
-        //Abrimos un File chooser, si seleccionamos un archivo y se abre el DOM correctamente habilitamos el boton de
-        //mostar Dom y mostramos un mensaje en el label de que se ha abierto el fichero correctamente
-        //si el DOM da un error al abrirse lo notificamos con un mensaje en el label de notificaciones
-        if (retrival == JFileChooser.APPROVE_OPTION) {
-            archivoSeleccionado = chooser.getSelectedFile();
-            gesDOM.abrir_XML_DOM(archivoSeleccionado);
-            if (gesDOM.abrir_XML_DOM(archivoSeleccionado) == 0) {
-//                jLabelMensajes.setText("<DOM abierto correctamente>");
-//                jButtonJAXB.setEnabled(true);
-                jTextArea1.setText(gesDOM.recorrerDOMyMostrar(gesDOM.doc));
-            } else {
-//                jLabelMensajes.setText("<Se ha producido un error al abrir el DOM>");
-            }
-
-        }
-    }//GEN-LAST:event_jMenuItemDOMActionPerformed
-
-    private void jMenuItemSAXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSAXActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        int retrival = chooser.showSaveDialog(null);
-        if (retrival == JFileChooser.APPROVE_OPTION) {
-            archivoSeleccionado = chooser.getSelectedFile();
-            gesSAX.abrir_XML_SAX(archivoSeleccionado);
-            jTextArea1.setText(gesSAX.recorrerSAX(archivoSeleccionado, gesSAX.sh, gesSAX.parser));
-//            jButtonSAX.setEnabled(true);
-
-        }
-    }//GEN-LAST:event_jMenuItemSAXActionPerformed
-
-    private void jMenuItemJAXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemJAXBActionPerformed
-
-    }//GEN-LAST:event_jMenuItemJAXBActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         gesJAXB.abrir_XML_JAXB(archivoSeleccionado);
@@ -416,11 +356,6 @@ public class MiFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItemDOM;
-    private javax.swing.JMenuItem jMenuItemJAXB;
-    private javax.swing.JMenuItem jMenuItemSAX;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

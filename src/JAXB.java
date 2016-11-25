@@ -38,28 +38,28 @@ public class JAXB {
             return -1;
         }
     }
-
-    public String recorrerJAXByMostrar() {
-        String datos_nodo[] = null;
-        String cadena_resultado = "";
-        //Crea una lista con objetos de tipo libro.
-        List<Carcel.Preso> lCarcel = miCarcel.getPreso();
-        //Recorre la lista para sacar los valores.
-        for (int i = 0; i < lCarcel.size(); i++) {
-            cadena_resultado = cadena_resultado + "\n" + "Código de Preso: " + lCarcel.get(i).getCodigoPreso();
-            cadena_resultado = cadena_resultado + "\n" + "El DNI es: " + lCarcel.get(i).getDNI();
-            cadena_resultado = cadena_resultado + "\n" + "El Nombre es: " + lCarcel.get(i).getNombre();
-            cadena_resultado = cadena_resultado + "\n" + "El Apellido es: " + lCarcel.get(i).getApellidos();
-            cadena_resultado = cadena_resultado + "\n" + "La Fecha De Nacimiento es: " + lCarcel.get(i).getFechaNacimiento();
-            cadena_resultado = cadena_resultado + "\n" + "La Condena se realizo en: " + lCarcel.get(i).getCondenadoEn();
-            cadena_resultado = cadena_resultado + "\n" + "La Nacionalidad es: " + lCarcel.get(i).getNacionalidad();
-            cadena_resultado = cadena_resultado + "\n" + "La Altura es: " + lCarcel.get(i).getAltura();
-            cadena_resultado = cadena_resultado + "\n" + "El Color de Piel es: " + lCarcel.get(i).getColorPiel();
-            cadena_resultado = cadena_resultado + "\n" + "Su Banda es: " + lCarcel.get(i).getBandaAsociacion();
-            cadena_resultado = cadena_resultado + "\n ----------------------------------";
-        }
-        return cadena_resultado;
-    }
+//
+//    public String recorrerJAXByMostrar() {
+//        String datos_nodo[] = null;
+//        String cadena_resultado = "";
+//        //Crea una lista con objetos de tipo libro.
+//        List<Carcel.Preso> lCarcel = miCarcel.getPreso();
+//        //Recorre la lista para sacar los valores.
+//        for (int i = 0; i < lCarcel.size(); i++) {
+//            cadena_resultado = cadena_resultado + "\n" + "Código de Preso: " + lCarcel.get(i).getCodigoPreso();
+//            cadena_resultado = cadena_resultado + "\n" + "El DNI es: " + lCarcel.get(i).getDNI();
+//            cadena_resultado = cadena_resultado + "\n" + "El Nombre es: " + lCarcel.get(i).getNombre();
+//            cadena_resultado = cadena_resultado + "\n" + "El Apellido es: " + lCarcel.get(i).getApellidos();
+//            cadena_resultado = cadena_resultado + "\n" + "La Fecha De Nacimiento es: " + lCarcel.get(i).getFechaNacimiento();
+//            cadena_resultado = cadena_resultado + "\n" + "La Condena se realizo en: " + lCarcel.get(i).getCondenadoEn();
+//            cadena_resultado = cadena_resultado + "\n" + "La Nacionalidad es: " + lCarcel.get(i).getNacionalidad();
+//            cadena_resultado = cadena_resultado + "\n" + "La Altura es: " + lCarcel.get(i).getAltura();
+//            cadena_resultado = cadena_resultado + "\n" + "El Color de Piel es: " + lCarcel.get(i).getColorPiel();
+//            cadena_resultado = cadena_resultado + "\n" + "Su Banda es: " + lCarcel.get(i).getBandaAsociacion();
+//            cadena_resultado = cadena_resultado + "\n ----------------------------------";
+//        }
+//        return cadena_resultado;
+//    }
 
     public int cambiarDato(String presoNombre, String nuevoNombre, String cambio) {
         if(presoNombre.trim().equals("") || nuevoNombre.trim().equals("")){
