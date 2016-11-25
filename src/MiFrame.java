@@ -18,6 +18,8 @@ public class MiFrame extends javax.swing.JFrame {
     DOM gesDOM = new DOM();
     SAX gesSAX = new SAX();
     JAXB gesJAXB = new JAXB();
+    //variable de comprobacion de errores en las consulta, en 0 es que no hay error
+    int consultaError = 0;
     File archivoSeleccionado = new File("carcel.xml");
     String consultaPredefinida = "";
 
@@ -26,15 +28,9 @@ public class MiFrame extends javax.swing.JFrame {
      */
     public MiFrame() {
         initComponents();
-        try{
-           UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch(Exception e) {
-        
-        }
-     
         this.setLocationRelativeTo(null);
         abrirMostrarSAX();
-        
+
     }
 
     /**
@@ -146,14 +142,14 @@ public class MiFrame extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Datos de Todos los presos", "Año de condena de todos los presos", "Preso con DNI: ", "Preso con Código: ", "Presos condenados antes de:", "Presos condenados después de:", " ", " " }));
-        jComboBox2.setSelectedIndex(-1);
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona una consulta", "Datos de Todos los presos", "Todos los codigos de preso", "Preso con DNI: ", "Preso con Código:", "Presos con Nombre:", "Presos con Apellido:", "Presos con Fecha de Nacimiento en:", "Presos con Nacionalidad:", "Presos con Color de piel:", "Presos con Altura:", "Presos de la Banda:", "Presos condenados antes de:", "Presos condenados después de:" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
             }
         });
 
+        jTextField3.setEnabled(false);
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -202,7 +198,7 @@ public class MiFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -226,39 +222,69 @@ public class MiFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //metodo que se utiliza para la consulta que requieren de un imput del usuario 
+    //se comprueba que este haya introducido los datos necesarios, de lo contrario se
+    //guarda una variable error para posteriormente mostrarselo al usuario
+    private void complementoConsulta(){
+      if(jTextField3.getText().trim().equals("")){
+          consultaError = 1;
+      }
+    }
+    
     private void compruebaConsulta() {
-//        Datos de Todos los presos
-//Año de condena de todos los presos
-//Preso con DNI: 
-//Preso con Código: 
-//Presos condenados antes de:
-//Presos condenados después de:
         String consulta = (String) jComboBox2.getSelectedItem();
         switch (consulta.trim()) {
             case "Datos de Todos los presos":
 
                 consultaPredefinida = "//Preso";
                 break;
-            case "Año de condena de todos los presos":
+            case "Todos los codigos de preso":
 
-                consultaPredefinida = "/Carcel/Preso/Condenado_en";
+                consultaPredefinida = "/Carcel/Preso/@Codigo_preso";
                 break;
             case "Preso con DNI:":
-
-                consultaPredefinida = "/Carcel/Preso[./DNI='" + jTextField3.getText().trim() +"']";
+                complementoConsulta();
+                consultaPredefinida = "/Carcel/Preso[./DNI='" + jTextField3.getText().trim() + "']";
                 break;
             case "Preso con Código:":
-
-                consultaPredefinida = "/Carcel/Preso[./@Codigo_preso='" + jTextField3.getText().trim() +"']";
+                complementoConsulta();
+                consultaPredefinida = "/Carcel/Preso[./@Codigo_preso='" + jTextField3.getText().trim() + "']";
+                break;
+            case "Presos con Apellido:":
+                complementoConsulta();
+                consultaPredefinida = "/Carcel/Preso[./Apellidos='" + jTextField3.getText().trim() + "']\"";
+                break;
+            case "Presos con Fecha de Nacimiento en:":
+                complementoConsulta();
+                consultaPredefinida = "/Carcel/Preso[./Fecha_nacimiento='" + jTextField3.getText().trim() + "']";
+                break;
+            case "Presos con Nacionalidad:":
+                complementoConsulta();
+                consultaPredefinida = "/Carcel/Preso[./Nacionalidad='" + jTextField3.getText().trim() + "']";
+                break;
+            case "Presos con Color de piel:":
+                complementoConsulta();
+                consultaPredefinida = "/Carcel/Preso[./ColorPiel='" + jTextField3.getText().trim() + "']";
+                break;
+            case "Presos con Altura:":
+                complementoConsulta();
+                consultaPredefinida = "/Carcel/Preso[./Altura='" + jTextField3.getText().trim() + "']";
+                break;
+            case "Presos de la Banda:":
+                complementoConsulta();
+                consultaPredefinida = "/Carcel/Preso[./BandaAsociacion='" + jTextField3.getText().trim() + "']";
                 break;
             case "Presos condenados antes de:":
-
-                consultaPredefinida = "/Carcel/Preso[./Condenado_en>'"+ jTextField3.getText().trim() +"']";
+                complementoConsulta();
+                consultaPredefinida = "/Carcel/Preso[./Condenado_en<'" + jTextField3.getText().trim() + "']";
                 break;
             case "Presos condenados después de:":
-
-                consultaPredefinida = "//Preso";
+                complementoConsulta();
+                consultaPredefinida = "/Carcel/Preso[./Condenado_en>'" + jTextField3.getText().trim() + "']";
                 break;
+            case "Selecciona una consulta":
+                consultaError = 2;
+               break;
 
         }
     }
@@ -272,27 +298,37 @@ public class MiFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         gesJAXB.abrir_XML_JAXB(archivoSeleccionado);
-        //si el cambiardato de JAXB devuelve 0 sera que ha ocurrido un error
+        //si el cambiadato de JAXB devuelve 0 sera que ha ocurrido un error
         //si devuelve 1 será que se ha guardado y cambiado el dato correctamente
         //si devuelve 2 nos indica que uno de los 2 jtexfield que necesitamos para cambiar un dato no tiene contenido
-        int resultadoGuardar = gesJAXB.cambiarDato(jTextField1.getText(), jTextField2.getText(), ((String) jComboBox1.getSelectedItem())) ;
-        if( resultadoGuardar == 0){
+        int resultadoGuardar = gesJAXB.cambiarDato(jTextField1.getText(), jTextField2.getText(), ((String) jComboBox1.getSelectedItem()));
+        if (resultadoGuardar == 0) {
             jLabel4.setText("Se ha producido un error al modificar el contenido, compruebe que todos los datos sean correctos");
-        } else if ( resultadoGuardar == 1 ){
+        } else if (resultadoGuardar == 1) {
             jLabel4.setText("El dato se ha modificado correctamente");
-        } else if ( resultadoGuardar == 2 ){
+        } else if (resultadoGuardar == 2) {
             jLabel4.setText("Compruebe que ha rellenado todos los campos");
-        } else if ( resultadoGuardar ==  3){
+        } else if (resultadoGuardar == 3) {
             jLabel4.setText("No existe ningun preso con se codigo");
         }
         abrirMostrarSAX();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jTextArea1.setText(null);
-        compruebaConsulta();
-        jTextArea1.setText(gesXPATHH.EjecutaXPath(archivoSeleccionado, consultaPredefinida));
-        jTextArea1.setCaretPosition(0);
+        compruebaConsulta(); 
+        if(consultaError == 2){
+            jLabel4.setText("Seleccione una de las consultas");
+            consultaError = 0;
+        } else if(consultaError == 1){
+             jLabel4.setText("Completa la consulta rellenado la casilla 'Completa Consulta'");
+              consultaError = 0;
+        } else {
+//            jTextArea1.setText(null);
+             jLabel4.setText("");
+             jTextArea1.setText(gesXPATHH.EjecutaXPath(archivoSeleccionado, consultaPredefinida));
+             jTextArea1.setCaretPosition(0);
+        }
+       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -305,6 +341,19 @@ public class MiFrame extends javax.swing.JFrame {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         if (!jButton2.isEnabled()) {
             jButton2.setEnabled(true);
+        }
+        //comprobamos que item del combobox de modificar se ha seleccionado y en funcion de si se necesita usar el jtextfield para la consulta
+        //selecionada o no lo habilitamos o deshabilitamos para que sea mas intuitivo para el usuario
+        String consulta  = (String) jComboBox2.getSelectedItem();
+        if(consulta.equals("Selecciona una consulta") || consulta.equals("Datos de Todos los presos") || consulta.equals("Todos los codigos de preso")) 
+               {
+                   if(jTextField3.isEnabled()){
+                       jTextField3.setEnabled(false);
+                   } 
+        } else {
+               if(!jTextField3.isEnabled()){
+                       jTextField3.setEnabled(true);
+                   } 
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
